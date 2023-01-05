@@ -2,7 +2,7 @@
 layout: post
 title: "The Importance of Randomness"
 date: 2023-01-05 01:00:16 -0000
-categories: Teach-Tech
+categories:
 ---
 According to Merriam-Webster’s dictionary, randomness is defined as the quality of being or seeming to lack a definite plan, purpose, or pattern (1). Depending on the context, randomness can be viewed positively or negatively. Though, the randomness experienced in everyday life is not truly random. The human brain cannot truly generate random ideas or numbers. When asked, the “random” numbers that humans have are ones that have been in the back of their brains or previously thought of. So, the task of generating random numbers was bestowed upon computers. 
 
