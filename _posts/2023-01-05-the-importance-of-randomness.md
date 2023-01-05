@@ -6,7 +6,7 @@ categories:
 ---
 ![](https://www.howtogeek.com/wp-content/uploads/2014/02/video-poker-gambling-randomness.jpg?trim=1,1&bg-color=000&pad=1,1)
 
-[Digital Poker | How to Geek](https://www.howtogeek.com/183051/htg-explains-how-computers-generate-random-numbers/)
+[Digital Poker - How to Geek](https://www.howtogeek.com/183051/htg-explains-how-computers-generate-random-numbers/)
 
 According to Merriam-Webster’s dictionary, randomness is defined as the quality of being or seeming to lack a definite plan, purpose, or pattern (1). Depending on the context, randomness can be viewed positively or negatively. Though, the randomness experienced in everyday life is not truly random. The human brain cannot truly generate random ideas or numbers. When asked, the “random” numbers that humans have are ones that have been in the back of their brains or previously thought of. So, the task of generating random numbers was bestowed upon computers. 
 
@@ -33,6 +33,7 @@ The “strong” and “secure” password generator that many establishments us
 Randomness is useful, whether it falls under pseudo-randomness or true randomness. Determining what residents of an area think about a new tax, or encrypting and protecting important data, requires randomness. True randomness might be almost impossible to achieve, but the need for it is immense.
 
 ******
+
 ~ Written by Laasya Aki
 
 ~ Edited by Christian Mueth
