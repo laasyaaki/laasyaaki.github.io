@@ -29,7 +29,7 @@ The robots, computers, and AI that exist today are nowhere near True AI. Artific
 
 ~ Written by Laasya Aki
 
-~ Edited by Christian Mueth
+~ Edited by Christian Mueth 
 
 References:
 1. https://www.ll.mit.edu/news/lincoln-laboratorys-new-ai-supercomputer-most-powerful-university
