@@ -2,7 +2,8 @@
 layout: post
 title: "The Importance of Randomness"
 date: 2023-01-05 01:00:16 -0000
-categories:
+author: Laasya Aki
+tags: TeachTech math technology
 ---
 ![](https://www.howtogeek.com/wp-content/uploads/2014/02/video-poker-gambling-randomness.jpg?trim=1,1&bg-color=000&pad=1,1)
 
@@ -34,7 +35,6 @@ Randomness is useful, whether it falls under pseudo-randomness or true randomnes
 
 ******
 
-~ Written by Laasya Aki
 
 ~ Edited by Christian Mueth
 
