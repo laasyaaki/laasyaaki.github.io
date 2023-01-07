@@ -2,7 +2,8 @@
 layout: post
 title: "Meredith Whittaker"
 date: 2023-01-06 01:00:16 -0000
-categories:
+author: Laasya Aki
+tags: TeachTech technology
 ---
 ![](https://img1.wsimg.com/isteam/ip/256c2eac-6fce-4fa6-8cc2-cb0858d3cc58/Meredith-Whittaker_16c00b7c28c_large.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1280)
 
