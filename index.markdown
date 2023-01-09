@@ -4,3 +4,27 @@
 
 layout: default
 ---
+## Pages
+
+- [Blog](https://lysol-soap.github.io/blog)
+
+### About Me
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
