@@ -4,11 +4,16 @@
 
 layout: default
 ---
-## Pages
+
+<div style="border=white">
+  <h2>Pages</h2>
 
 - [Blog](https://lysol-soap.github.io/blog)
+  </div>
+*****
 
 ### About Me
+
 
 
 
