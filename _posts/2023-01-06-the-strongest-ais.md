@@ -26,9 +26,9 @@ Hanson Robotics' Sophia is the most advanced humanoid robot that harnesses AI. S
 ### Conclusion
 
 The robots, computers, and AI that exist today are nowhere near True AI. Artificial Intelligence has a long way to go before becoming Strong. But, scientists, mathematicians, and engineers are persistent and the day that AI becomes equivalent to the human mind will come. 
-******
 
-~ Written by Laasya Aki
+
+------------------
 
 ~ Edited by Christian Mueth 
 
