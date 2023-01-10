@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "The Importance of Randomness"
-date: 2023-01-05 01:00:16 -0000
+title: "The Impact of Technology on Human Interactions"
+date: 2023-01-10 01:00:16 -0000
 author: Laasya Aki
-tags: TeachTech math technology
+tags: TeachTech technology
 ---
 
 ![](https://img1.wsimg.com/isteam/ip/256c2eac-6fce-4fa6-8cc2-cb0858d3cc58/BS---C7---3---What-Are-the-Effects-of-Technolo.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1280)
