@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "The Importance of Randomness"
+title: "The Rise of Google Search"
 date: 2023-01-10 01:00:16 -0000
 author: Laasya Aki
 tags: TeachTech math technology
