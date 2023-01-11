@@ -35,3 +35,5 @@ In conclusion, many new technologies and technological trends are to appear in 2
 References:
 1. https://buildwithmatter.com/
 2. https://www.computer.org/publications/tech-news/trends/2022-report
+
+This article was originally published at [the Teach-Technology Organization, Inc. online technology blog](https://teach-technology.org/blog). I volunteer as a tech blog writer at this organization, which is dedicated to bridging the gap between seniors and technology. You can read this article (and many more) at the Teach Technology site. 
