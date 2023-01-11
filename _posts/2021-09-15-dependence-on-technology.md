@@ -44,3 +44,5 @@ References:
 2. [technology_dev_ paper.pdf (fema.gov)](https://www.fema.gov/pdf/about/programs/oppa/technology_dev_%20paper.pdf)
 3. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6510111/#:~:text=The%20term%20NOMOPHOBIA%20or%20NO,a%20particular%2Fspecific%20things%E2%80%9D.
 4. https://www.un.org/en/un75/impact-digital-technologies
+
+This article was originally published at [the Teach-Technology Organization, Inc. online technology blog](https://teach-technology.org/blog). I volunteer as a tech blog writer at this organization, which is dedicated to bridging the gap between seniors and technology. You can read this article (and many more) at the Teach Technology site. 
