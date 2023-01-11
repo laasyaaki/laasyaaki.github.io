@@ -28,3 +28,5 @@ References:
 
 1. https://trace.tennessee.edu/cgi/viewcontent.cgi?article=1398&context=utk_chanhonoproj
 2. https://www.nsa.gov/about/faqs/rich-heritage-cryptology-faqs/#crypt3
+
+This article was originally published at [the Teach-Technology Organization, Inc. online technology blog](https://teach-technology.org/blog). I volunteer as a tech blog writer at this organization, which is dedicated to bridging the gap between seniors and technology. You can read this article (and many more) at the Teach Technology site. 
