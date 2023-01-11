@@ -25,3 +25,5 @@ There are many types of authentications, and some are relatively more secure tha
 References:
 1. https://www.sailpoint.com/identity-library/authentication-methods-used-for-network-security/
 2. https://www.idrnd.ai/5-authentication-methods-that-can-prevent-the-next-breach/
+
+This article was originally published at [the Teach-Technology Organization, Inc. online technology blog](https://teach-technology.org/blog). I volunteer as a tech blog writer at this organization, which is dedicated to bridging the gap between seniors and technology. You can read this article (and many more) at the Teach Technology site. 
