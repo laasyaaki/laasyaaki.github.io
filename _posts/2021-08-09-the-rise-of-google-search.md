@@ -48,3 +48,5 @@ References:
 11. https://en.wikipedia.org/wiki/Eugene_Garfield
 12. https://en.wikipedia.org/wiki/Hub_(network_science)
 13. https://ibcomputerscience.xyz/lesson-web-general/
+
+This article was originally published at [the Teach-Technology Organization, Inc. online technology blog](https://teach-technology.org/blog). I volunteer as a tech blog writer at this organization, which is dedicated to bridging the gap between seniors and technology. You can read this article (and many more) at the Teach Technology site. 
