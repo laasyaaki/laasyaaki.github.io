@@ -42,3 +42,5 @@ References:
 2. https://www.iwm.org.uk/history/how-alan-turing-cracked-the-enigma-code
 3. https://www.history.com/this-day-in-history/enigma-key-broken#:~:text=The%20Enigma%20machine%2C%20invented%20in,considered%20its%20encoding%20system%20unbreakable.
 4. https://www.tnmoc.org/bombe
+
+This article was originally published at [the Teach-Technology Organization, Inc. online technology blog](https://teach-technology.org/blog). I volunteer as a tech blog writer at this organization, which is dedicated to bridging the gap between seniors and technology. You can read this article (and many more) at the Teach Technology site. 
