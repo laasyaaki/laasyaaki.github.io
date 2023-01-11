@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Dependence on Technology"
-date: 2023-01-10 01:00:16 -0000
+date: 2021-09-15 01:00:16 -0000
 author: Laasya Aki
 tags: TeachTech math technology
 ---
