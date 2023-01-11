@@ -26,3 +26,5 @@ References:
 2. https://www.washingtonpost.com/opinions/2021/10/06/stop-comparing-facebook-instagram-cigarettes/
 3. https://www.nytimes.com/2021/10/05/technology/who-is-frances-haugen.html
 4. https://www.npr.org/2021/10/05/1043377310/facebook-whistleblower-frances-haugen-congress
+
+This article was originally published at [the Teach-Technology Organization, Inc. online technology blog](https://teach-technology.org/blog). I volunteer as a tech blog writer at this organization, which is dedicated to bridging the gap between seniors and technology. You can read this article (and many more) at the Teach Technology site. 
