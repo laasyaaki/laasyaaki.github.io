@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The Impact of Technology on Human Interactions"
-date: 2023-01-10 01:00:16 -0000
+date: 2021-10-29 01:00:16 -0000
 author: Laasya Aki
 tags: TeachTech technology
 ---
