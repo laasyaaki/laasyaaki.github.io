@@ -26,3 +26,5 @@ Robot caregivers have many benefits that cannot be ignored. Because AI technolog
 References:
 1. https://www.pewresearch.org/internet/2017/10/04/americans-attitudes-toward-robot-caregivers/
 2. https://cs.stanford.edu/people/eroberts/cs201/projects/2010-11/ComputersMakingDecisions/robotic-nurses/index.html
+
+This article was originally published at [the Teach-Technology Organization, Inc. online technology blog](https://teach-technology.org/blog). I volunteer as a tech blog writer at this organization, which is dedicated to bridging the gap between seniors and technology. You can read this article (and many more) at the Teach Technology site. 
