@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Cryptology"
-date: 2023-01-10 01:00:16 -0000
+date: 2021-11-01 01:00:16 -0000
 author: Laasya Aki
 tags: TeachTech math technology
 ---
