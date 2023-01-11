@@ -30,3 +30,5 @@ References:
 2. https://www.endeavorrx.com/
 3. https://www.webmd.com/add-adhd/childhood-adhd/adhd-and-video-games-is-there-a-link
 4. https://www.cdc.gov/ncbddd/adhd/index.html
+
+This article was originally published at [the Teach-Technology Organization, Inc. online technology blog](https://teach-technology.org/blog). I volunteer as a tech blog writer at this organization, which is dedicated to bridging the gap between seniors and technology. You can read this article (and many more) at the Teach Technology site. 
