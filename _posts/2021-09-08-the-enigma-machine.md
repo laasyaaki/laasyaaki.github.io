@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The Enigma Machine"
-date: 2023-01-10 01:00:16 -0000
+date: 2021-09-08 01:00:16 -0000
 author: Laasya Aki
 tags: TeachTech math technology
 ---
