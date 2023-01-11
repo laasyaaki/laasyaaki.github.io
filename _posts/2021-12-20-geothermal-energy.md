@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The Future of Clean-Energy: Geothermal Energy"
-date: 2023-01-11 01:00:16 -0000
+date: 2021-12-20 01:00:16 -0000
 author: Laasya Aki
 tags: TeachTech environment technology
 ---
