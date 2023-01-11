@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Meredith Whittaker"
-date: 2023-01-06 01:00:16 -0000
+date: 2021-08-25 01:00:16 -0000
 author: Laasya Aki
 tags: TeachTech technology
 ---
