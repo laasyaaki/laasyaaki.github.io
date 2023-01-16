@@ -8,6 +8,7 @@ layout: default
 ## Pages
 
 - [Blog](https://lysol-soap.github.io/blog)
+- [Resume](https://lysol-soap.github.io/resume)
 
 ----
 
