@@ -9,6 +9,7 @@ layout: default
 
 - [Blog](https://lysol-soap.github.io/blog)
 
+View my resume [here](https://lysol-soap.github.io/Laasya_Aki_Resume.pdf).
 ----
 
 ### About Me
