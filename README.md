@@ -1,3 +1,3 @@
 # lysol-soap.github.io
 
-*In Progress*
+*Site in progress*
