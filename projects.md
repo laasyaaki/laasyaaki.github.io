@@ -15,7 +15,7 @@ title: Projects
 [Technovation Girls](https://technovationchallenge.org/) is an app-building contest where teams create an app to solve a problem. This competition also ties in a business aspect where teams have to create a pitch video along with the app. My team, Team Velocity, is creating an app to identify diseases in crops using machine learning. A user takes a picture of a crop and our app will identify the disease (or if it is healthy) based on a classification performed by our machine learning model. 
 
 ## Wordle Clone - School Project 
-*Github repo + link will be inserted after my professor allows us to discuss solutions*
+[Link to github repo.](https://github.com/lysol-soap/wordle_clone)
 
 Through PSEO, I am taking [CSCI 1913 - Introduction to Algorithms, Data Structures, and Program Development](https://onestop2.umn.edu/pcas/viewCatalogCourse.do?courseId=809667). Our first project was to create a clone of the game [Wordle](https://www.nytimes.com/games/wordle/index.html) using python. This project proved to be trickier than I thought it would be. While the concept of the game was simple, developing an algorithm for certain parts was a learning expirience. Including special cases for words with duplicate letters was probably the hardest part. I learned more about program flexibility from this project. 
 
