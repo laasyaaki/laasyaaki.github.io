@@ -7,7 +7,7 @@ tags: TeachTech technology
 ---
 ![](https://images.ctfassets.net/cnu0m8re1exe/35qFDkC0qr4qatZTGKNfFR/b6939b1fb4898eca06acb0e6476b08e5/CRSIPRScissors.jpg?fm=jpg&fl=progressive&w=660&h=433&fit=fill)
 
-[Cutting genes | Discover Magazine](https://www.discovermagazine.com/health/this-new-gene-editing-tool-can-search-and-replace-genes-without-breaking)
+[Cutting genes - Discover Magazine](https://www.discovermagazine.com/health/this-new-gene-editing-tool-can-search-and-replace-genes-without-breaking)
 
 Modifying genes in cells used to take up years, but with genetic scissors, that process can be shortened to a few weeks. Modifying and snipping genes is useful for a lot of reasons. We can remove a genome that causes a disease or illness before a baby is born. We can breed different plant species to find the perfect combination of multiple types. We can also eliminate diseases and viruses in plants. There are so many different things we can do, but modifying genes isn’t always an option because of how long it takes and how much it can cost. The older methods weren’t as precise either. However, we can now snip and edit DNA in just a few weeks.
 
