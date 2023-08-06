@@ -3,7 +3,7 @@ layout: post
 title: "Exploring Data Bias Against Women"
 date: 2023-06-25 01:00:16 -0000
 author: Laasya Aki
-tags: TeachTech technology
+tags: technology
 ---
 ![](https://cdn.drawception.com/images/panels/2015/11-2/XmL4js9KHm-1.png)
 
