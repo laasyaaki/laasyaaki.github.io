@@ -5,7 +5,7 @@ title: Projects
 # Projects
 
 ## Modeling the Future 2022-2023 - Competition
-[Click here for our research paper.](https://lysol-soap.github.io/Spotting%20Melanoma.pdf)
+[Click here for our research paper.](https://laasyaaki.github.io/Spotting%20Melanoma.pdf)
 
 [Modeling the Future](https://www.mtfchallenge.org/how-it-works/) is an actuarial math modeling contest where teams answer questions based on a scenario and dataset. The team also creates a project proposal for a data analysis research project. If selected as semi-finalists, the team will go on to create the project outlined in their proposal. My team, the Significant Errors, made it to semi-finalists and we research rising rates of melanoma cancer in Americans. We used SEER data to make predictions about future melanoma incidence rate trends and issued recommendations to combat this problem. 
 
