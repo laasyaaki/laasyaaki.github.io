@@ -4,10 +4,10 @@ title: Projects
 ---
 # Projects
 
-## Modeling the Future 2022-2023 - Competition
-[Click here for our research paper.](https://laasyaaki.github.io/Spotting%20Melanoma.pdf)
+## CODEify 
+[CODEify website](https://code-ify.org/)
 
-[Modeling the Future](https://www.mtfchallenge.org/how-it-works/) is an actuarial math modeling contest where teams answer questions based on a scenario and dataset. The team also creates a project proposal for a data analysis research project. If selected as semi-finalists, the team will go on to create the project outlined in their proposal. My team, the Significant Errors, made it to semi-finalists and we research rising rates of melanoma cancer in Americans. We used SEER data to make predictions about future melanoma incidence rate trends and issued recommendations to combat this problem. 
+I co-founded CODEify to make coding education accessible and inspire a love of technology in young children. We want to increase the representation of women, racial minorities, and other marginzalized groups in technology. We have worked with other non-profits like the Minnesota Technological Association, the JP4 Foundation, and the Minnesota Institute for Nigerian Development. As part of this organization I have tutored some of the coding classes we offer, written blogs, and promoted our mission within different communities. I have also helped develop our curriculum and I have coded our website.
 
 ## Technovation 2023 - Competition
 [Click here to view our Technical Video.](https://youtu.be/VHb-8lDwb1Y)
@@ -29,4 +29,9 @@ Through PSEO, I am taking [CSCI 1913 - Introduction to Algorithms, Data Structur
 No link due to AP Policy.
 
 My program for the AP Computer Science Principles [Create Task](https://apcentral.collegeboard.org/courses/ap-computer-science-principles/exam) portion of the exam. 
+
+## Modeling the Future 2022-2023 - Competition
+[Click here for our research paper.](https://laasyaaki.github.io/Spotting%20Melanoma.pdf)
+
+[Modeling the Future](https://www.mtfchallenge.org/how-it-works/) is an actuarial math modeling contest where teams answer questions based on a scenario and dataset. The team also creates a project proposal for a data analysis research project. If selected as semi-finalists, the team will go on to create the project outlined in their proposal. My team, the Significant Errors, made it to semi-finalists and we research rising rates of melanoma cancer in Americans. We used SEER data to make predictions about future melanoma incidence rate trends and issued recommendations to combat this problem. 
 
