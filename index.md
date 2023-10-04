@@ -7,7 +7,7 @@ layout: default
 
 ## Pages
 
-- [Blog](https://laasyaaki.github.io/blog)
+- [Blog - EquiTech Insights](https://laasyaaki.github.io/blog)
 - [Projects](https://laasyaaki.github.io/projects.html)
 
 View my resume [here](Laasya_Aki_Resume_.pdf).  
