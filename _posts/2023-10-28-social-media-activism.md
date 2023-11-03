@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "How Social Media Helps and Hinders Activists"
-date: 2023-03-05 01:00:16 -0000
+date: 2023-10-28 01:00:16 -0000
 author: Laasya Aki
 tags: technology
 ---
