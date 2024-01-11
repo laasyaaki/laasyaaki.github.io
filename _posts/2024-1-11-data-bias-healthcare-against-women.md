@@ -7,7 +7,7 @@ tags: technology
 ---
 ![](https://healthcaretransformers.com/wp-content/uploads/2023/11/roche-ht-header-setting-the-right-standards-to-address-gender-bias-in-datasets-and-ai.png)
 
-[Gender Bias in Healthcare | Healthcare Transformers](https://healthcaretransformers.com/wp-content/uploads/2023/11/roche-ht-header-setting-the-right-standards-to-address-gender-bias-in-datasets-and-ai.png)
+[Gender Bias in Healthcare - Healthcare Transformers](https://healthcaretransformers.com/wp-content/uploads/2023/11/roche-ht-header-setting-the-right-standards-to-address-gender-bias-in-datasets-and-ai.png)
 
 I previously wrote an article about data bias against women and what I learned from reading Caroline Criado-Perez’s book Invisible Women: Exposing Data Bias in a World Designed for Men. In this article I wanted to focus on the impacts of data bias against women specifically in healthcare. In the era of advancing technology and data-driven decision-making, we cannot ignore the critical role data plays in shaping healthcare policies and treatment strategies. However, a darker reality lurks beneath the surface as data bias against women becomes increasingly apparent in the healthcare sector. This bias not only impacts the accuracy of diagnoses and treatment plans but also perpetuates gender-based disparities in medical research and outcomes.
 
