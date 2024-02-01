@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Data Bias Against Women in Healthcare"
-date: 2024-1-11 01:00:16 -0000
+date: 2024-01-11 01:00:16 -0000
 author: Laasya Aki
 tags: technology
 ---
