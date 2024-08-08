@@ -6,7 +6,7 @@ title: Projects
 
 ## Dynamic Memory Allocator
 
-This is a dynamic memory allocator built in C to mimic the existing malloc() function. I used doubly linked lists mimic malloc(). 
+This is a dynamic memory allocator built in C to mimic the existing malloc() function. I used doubly linked lists to execute the project. 
 
 ## Technovation 2024 - Competition
 
