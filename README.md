@@ -1,3 +1,3 @@
 # lysol-soap.github.io
 
-*Site in progress*
+Personal Site. Check it out!

@@ -10,7 +10,7 @@ layout: default
 - [Blog](https://laasyaaki.github.io/blog)
 - [Projects](https://laasyaaki.github.io/projects.html)
 
-View my resume [here](Laasya_Aki_Resume_.pdf).  
+View my resume [here](LaasyaAkiResume2024.pdf).  
 ----
 
 ### About Me
