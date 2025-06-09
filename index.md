@@ -10,7 +10,7 @@ layout: default
 - [Blog](https://laasyaaki.github.io/blog)
 - [Projects](https://laasyaaki.github.io/projects.html)
 
-View my resume [here](LaasyaAkiResume2024.pdf).  
+View my resume [here](laasya_aki_carnegie_mellon_computer_science_resume.pdf).  
 ----
 
 ### About Me
