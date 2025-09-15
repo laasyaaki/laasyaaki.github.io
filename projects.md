@@ -26,10 +26,10 @@ Summer 2023 I worked as an app development intern at the Minnesota Twins. I used
 
 ## DiaBuddies
 
-[Technovation Girls](https://technovationchallenge.org/) is an app-building contest where teams create an app to solve a problem. This competition also ties in a business aspect where teams have to create a pitch video along with the app. My team, Diabuddies, created a bloog sugar management app specifically targeted towards children. The features included a game to learn more about diabetes, an info page with different quizzes and challenges, a blood sugar level tracker, and a tree which grew based on points earned for interacting with the app and having healthy glucose levels. Our project was a winning app in 2024.
+My team and I, Diabuddies, created a blood sugar management app specifically targeted towards children. The features included a game to learn more about diabetes, an info page with different quizzes and challenges, a blood sugar level tracker, and a tree which grew based on points earned for interacting with the app and having healthy glucose levels. Our project was TechnovationMN a winning app in 2024.
 
 ## AgrID
 [Click here to view our Technical Video.](https://youtu.be/VHb-8lDwb1Y)
 
-[Technovation Girls](https://technovationchallenge.org/) is an app-building contest where teams create an app to solve a problem. This competition also ties in a business aspect where teams have to create a pitch video along with the app. My team, Team Velocity, is creating an app to identify diseases in crops using machine learning. A user takes a picture of a crop and our app will identify the disease (or if it is healthy) based on a classification performed by our machine learning model. Our project was a winning app in 2023. I used React Native and JavaScript. 
+My team and I, Team Velocity, is created an app to identify diseases in crops using machine learning. A user takes a picture of a crop and our app will identify the disease (or if it is healthy) based on a classification performed by our machine learning model. Our project was a TechnovationMN winning app in 2023. I used React Native and JavaScript. 
 
