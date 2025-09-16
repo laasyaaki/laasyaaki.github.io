@@ -5,7 +5,7 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://laasyaaki.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 github_username: laasyaaki
-linkedin_username: laasyaaki
+linkedin_username: https://www.linkedin.com/in/laasyaaki
 
 # Build settings
 theme: jekyll-theme-hacker
