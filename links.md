@@ -1,4 +1,4 @@
-- Linkedin: https://www.linkedin.com/in/laasyaaki
-- GitHub: https://github.com/
+- Linkedin: [https://www.linkedin.com/in/laasyaaki](https://www.linkedin.com/in/laasyaaki)
+- GitHub: [https://github.com/](https://github.com/)
 - Email: [laasya@cmu.edu](mailto:laasya@cmu.edu)
-- Pintrest: https://www.pinterest.com/pricklypearyum/
+- Pintrest: [https://www.pinterest.com/pricklypearyum/](https://www.pinterest.com/pricklypearyum/)
