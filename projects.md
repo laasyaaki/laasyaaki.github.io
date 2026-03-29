@@ -4,9 +4,13 @@ title: Projects
 ---
 # Projects/Internships/Research!
 
-## QA Automation Engineering Intern @ Dispatch
+## AI Software Engineer @ My Research Prof's Startup
 
-This summer (summer 2025) I intered at a startup called Dispatch which serves as a last-mile delivery logistics platform. I spent my time in the QA team learning about automating mobile and web tests and how we can use AI to improve the process. I primarily trained an agent to convert legacy automation suites to use new frameworks (for mobile we went from Appium to Maestro and for web we went from Selenium to Playwright/Pytest). 
+Some cybersecurity, some AI... will update soon!
+
+## Software Automation Engineering Intern @ Dispatch
+
+Summer 2025: I interned at a startup called Dispatch which serves as a last-mile delivery logistics platform. I spent my time in the QA team learning about automating mobile and web tests and how we can use AI to improve the process. I primarily trained an agent to convert legacy automation suites to use new frameworks (for mobile we went from Appium to Maestro and for web we went from Selenium to Playwright/Pytest). 
 
 ## Automating Playbook Generation
 
@@ -14,7 +18,7 @@ I am currently part of an AI and cybersecurity research project in CMU's S3D. We
 
 ## CMUEats
 
-I am currently a tech lead of [CMUEats](https://cmueats.com), CMU's student-run, one stop shop for all dining information. This team is part CMU ScottyLabs and CMUEats is the club's most widely used web app. I am leading a team of dedicated students who are all adding their own features to the project. Future features include a review system, filtering by dietary restrictions, and integrating the different locations menus into the main site. 
+I'm a tech lead (2025-2026) of [CMUEats](https://cmueats.com), CMU's student-run, one stop shop for all dining information. This team is part CMU ScottyLabs and CMUEats is the club's most widely used web app. I am leading a team of dedicated students who are all adding their own features to the project. Future features include a review system, filtering by dietary restrictions, and integrating the different locations menus into the main site. 
 
 ## IIoT Intern @ General Mills
 
