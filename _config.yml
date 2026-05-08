@@ -1,19 +1,19 @@
 title: Laasya Aki
 
 description: >- # this means to ignore newlines until "baseurl:"
-  Checkout my projects!
+    Checkout my projects!
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://laasyaaki.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://laasyaaki.com" # the base hostname & protocol for your site, e.g. http://example.com
 github_username: laasyaaki
 linkedin_username: https://www.linkedin.com/in/laasyaaki
 
 # Build settings
 theme: jekyll-theme-hacker
 plugins:
-  - jekyll-feed
+    - jekyll-feed
 
 sidebar:
-  - blog
+    - blog
 
 # exclude:
 #   - .sass-cache/
