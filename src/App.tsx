@@ -195,7 +195,15 @@ function App() {
                                         aria-label="Open new tab"
                                         onClick={() => openView("search")}
                                     >
-                                        +
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            height="20px"
+                                            viewBox="0 -960 960 960"
+                                            width="20px"
+                                            fill="#000000"
+                                        >
+                                            <path d="M444-444H240v-72h204v-204h72v204h204v72H516v204h-72v-204Z" />
+                                        </svg>
                                     </button>
                                 </div>
                                 <div
@@ -234,9 +242,7 @@ function App() {
                             {activeView === "mail" && <MailPanel />}
                             {activeView === "contacts" && <ContactsPanel />}
                             {activeView === "notepad" && <BlogPanel />}
-                            {activeView === "paint" && (
-                                <PaintPanel />
-                            )}
+                            {activeView === "paint" && <PaintPanel />}
                             {activeView === "minesweeper" && (
                                 <DummyApp title="Minesweeper" />
                             )}
@@ -328,7 +334,7 @@ function ExperiencePanel({
         <div className="experience-grid">
             {experiences.map((experience, index) => (
                 <article className="experience-card" key={experience.title}>
-                    <PhotoStrip title={experience.title} offset={index} />
+                    {/* <PhotoStrip title={experience.title} offset={index} /> */}
                     <div>
                         <h3>{experience.title}</h3>
                         {experience.meta && (
@@ -712,7 +718,11 @@ function PaintPanel() {
             <div className="paint-toolbar" aria-label="Paint colors">
                 {colors.map((item) => (
                     <button
-                        className={color === item.value ? "color-swatch is-active" : "color-swatch"}
+                        className={
+                            color === item.value
+                                ? "color-swatch is-active"
+                                : "color-swatch"
+                        }
                         key={item.value}
                         style={{ backgroundColor: item.value }}
                         type="button"
@@ -720,7 +730,11 @@ function PaintPanel() {
                         onClick={() => setColor(item.value)}
                     />
                 ))}
-                <button className="button small" type="button" onClick={clearCanvas}>
+                <button
+                    className="button small"
+                    type="button"
+                    onClick={clearCanvas}
+                >
                     Clear
                 </button>
             </div>

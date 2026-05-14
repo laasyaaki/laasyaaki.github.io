@@ -22,9 +22,14 @@ export const about =
 
 export const experiences: Experience[] = [
     {
-        title: "AI Software Engineer",
+        title: "AI Software Engineering Intern",
         meta: "CyberDNA Security, Summer 2026",
         body: "Some cybersecurity, some AI... updates coming soon.",
+    },
+    {
+        title: "Bias Lens",
+        meta: "Steelhacks 2025 3x Winner",
+        body: "Using LLMs to identify biased language in medical papers. We look at the sample of people included in the study and identify any genedered language being used to help users determine whether the results of a study is generalizable. All you do is paste the study or article link and we analyze it for you, helping you catch anything you may have missed and provide a second opinion on the applicability of the study's results.",
     },
     {
         title: "Software Automation Engineering Intern",

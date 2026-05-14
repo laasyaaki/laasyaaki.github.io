@@ -236,19 +236,20 @@ a {
 }
 
 .tab {
+    background: #6e6e6e7f;
+    border-bottom-color: #313131;
+    top: 0;
+    z-index: 1;
+}
+
+.tab.is-active {
+    background: #c0c0c0;
     border-bottom-color: #808080;
     border-radius: 3px 3px 0 0;
     min-height: 32px;
     padding-inline: 16px;
     position: relative;
     top: 2px;
-}
-
-.tab.is-active {
-    background: #6e6e6e7f;
-    border-bottom-color: #313131;
-    top: 0;
-    z-index: 1;
 }
 
 .new-tab {
