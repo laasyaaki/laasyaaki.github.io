@@ -51,7 +51,7 @@ const taskbarLabels: Record<AppView, string> = {
     experience: "Internet Explorer",
     search: "Internet Explorer",
     mail: "Contact Me",
-    contacts: "Socials",
+    contacts: "My Links",
     notepad: "Blog",
     paint: "Paint",
     minesweeper: "Minesweeper",
@@ -62,7 +62,7 @@ const windowTitles: Record<AppView, string> = {
     experience: "Internet Explorer",
     search: "Internet Explorer",
     mail: "Contact Me",
-    contacts: "Socials",
+    contacts: "My Links",
     notepad: "Blog",
     paint: "Paint",
     minesweeper: "Minesweeper",
@@ -289,7 +289,7 @@ function App() {
                         </button>
                     ))}
                 </nav>
-                <time dateTime="2026">CMU CS + ML</time>
+                <time dateTime="2026">33:72 PM</time>
             </footer>
         </main>
     );
@@ -647,8 +647,13 @@ function PaintPanel() {
     const colors = [
         { label: "Black", value: "#000000" },
         { label: "Red", value: "#d02020" },
+        { label: "Orange", value: "#ffa500" },
+        { label: "Yellow", value: "#ffff00" },
         { label: "Green", value: "#008000" },
         { label: "Blue", value: "#0000cc" },
+        { label: "Purple", value: "#800080" },
+        { label: "Pink", value: "#f1788c" },
+        { label: "Brown", value: "#863618" },
     ];
 
     function canvasPoint(event: PointerEvent<HTMLCanvasElement>) {
