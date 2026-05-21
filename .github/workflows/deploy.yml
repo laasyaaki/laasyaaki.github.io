@@ -2,7 +2,7 @@ name: Deploy site
 
 on:
   push:
-    branches: [main]
+    branches: [main, codex/test]
   workflow_dispatch:
 
 permissions:
