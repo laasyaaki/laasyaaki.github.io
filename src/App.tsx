@@ -453,7 +453,7 @@ function ExperienceModal({
                     </button>
                 </header>
                 <div className="modal-body">
-                    <PhotoStrip title={experience.title} offset={index} />
+                    {/* <PhotoStrip title={experience.title} offset={index} /> */}
                     {experience.meta && (
                         <p className="meta">{experience.meta}</p>
                     )}
