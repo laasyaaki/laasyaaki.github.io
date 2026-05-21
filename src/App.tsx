@@ -7,7 +7,7 @@ type AppView =
     | "home"
     | "experience"
     | "search"
-    | "mail"
+    // | "mail"
     | "contacts"
     | "notepad"
     | "paint"
@@ -26,7 +26,7 @@ const pathByView: Record<AppView, string> = {
     home: "/",
     experience: "/experience",
     search: "/search",
-    mail: "/mail",
+    // mail: "/mail",
     contacts: "/links",
     notepad: "/blog",
     paint: "/paint",
@@ -39,7 +39,7 @@ const desktopApps: {
     icon: "ie" | "mail" | "contacts" | "paint" | "notepad" | "minesweeper";
 }[] = [
     { id: "home", label: "Internet Explorer", icon: "ie" },
-    { id: "mail", label: "Mail", icon: "mail" },
+    // { id: "mail", label: "Mail", icon: "mail" },
     { id: "notepad", label: "Notepad", icon: "notepad" },
     { id: "contacts", label: "Contacts", icon: "contacts" },
     { id: "paint", label: "Paint", icon: "paint" },
@@ -50,7 +50,7 @@ const taskbarLabels: Record<AppView, string> = {
     home: "Internet Explorer",
     experience: "Internet Explorer",
     search: "Internet Explorer",
-    mail: "Contact Me",
+    // mail: "Contact Me",
     contacts: "My Links",
     notepad: "Blog",
     paint: "Paint",
@@ -61,7 +61,7 @@ const windowTitles: Record<AppView, string> = {
     home: "Internet Explorer",
     experience: "Internet Explorer",
     search: "Internet Explorer",
-    mail: "Contact Me",
+    // mail: "Contact Me",
     contacts: "My Links",
     notepad: "Blog",
     paint: "Paint",
@@ -239,7 +239,7 @@ function App() {
                                 />
                             )}
                             {activeView === "search" && <SearchPanel />}
-                            {activeView === "mail" && <MailPanel />}
+                            {/* {activeView === "mail" && <MailPanel />} */}
                             {activeView === "contacts" && <ContactsPanel />}
                             {activeView === "notepad" && <BlogPanel />}
                             {activeView === "paint" && <PaintPanel />}
