@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import type { FormEvent, PointerEvent } from "react";
+import type { FormEvent, MouseEvent, PointerEvent } from "react";
 import { about, experiences, links, type Experience } from "./content";
 import { blogPosts, type BlogPost } from "./posts";
 
@@ -11,6 +11,7 @@ type AppView =
     | "contacts"
     | "notepad"
     | "paint"
+    // | "music"
     | "minesweeper";
 
 const browserTabs: { id: AppView; label: string }[] = [
@@ -22,6 +23,9 @@ const resumeHref = "/Laasya_aki_resume_carnegie_mellon_computer_science_ML.pdf";
 const contactFormAccessKey =
     import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ?? "YOUR_WEB3FORMS_ACCESS_KEY";
 
+const spotifyPlaylistEmbedUrl =
+    "https://open.spotify.com/embed/playlist/6PUc70ez1gmDnnfKVFwEQc?utm_source=generator&si=58943ff5484f49a5";
+
 const pathByView: Record<AppView, string> = {
     home: "/",
     experience: "/experience",
@@ -30,19 +34,28 @@ const pathByView: Record<AppView, string> = {
     contacts: "/links",
     notepad: "/blog",
     paint: "/paint",
+    // music: "/music",
     minesweeper: "/minesweeper",
 };
 
 const desktopApps: {
     id: AppView;
     label: string;
-    icon: "ie" | "mail" | "contacts" | "paint" | "notepad" | "minesweeper";
+    icon:
+        | "ie"
+        | "mail"
+        | "contacts"
+        | "paint"
+        | "notepad"
+        | "music"
+        | "minesweeper";
 }[] = [
     { id: "home", label: "Internet Explorer", icon: "ie" },
     // { id: "mail", label: "Mail", icon: "mail" },
     { id: "notepad", label: "Notepad", icon: "notepad" },
     { id: "contacts", label: "Contacts", icon: "contacts" },
     { id: "paint", label: "Paint", icon: "paint" },
+    // { id: "music", label: "CD Player", icon: "music" },
     { id: "minesweeper", label: "Minesweeper", icon: "minesweeper" },
 ];
 
@@ -51,9 +64,10 @@ const taskbarLabels: Record<AppView, string> = {
     experience: "Internet Explorer",
     search: "Internet Explorer",
     // mail: "Contact Me",
-    contacts: "My Links",
-    notepad: "Blog",
+    contacts: "Contacts",
+    notepad: "Notepad",
     paint: "Paint",
+    // music: "CD Player",
     minesweeper: "Minesweeper",
 };
 
@@ -65,6 +79,7 @@ const windowTitles: Record<AppView, string> = {
     contacts: "My Links",
     notepad: "Blog",
     paint: "Paint",
+    // music: "CD Player",
     minesweeper: "Minesweeper",
 };
 
@@ -93,14 +108,482 @@ function googleSearch(query: string) {
     );
 }
 
-function App() {
-    const [activeView, setActiveView] = useState<AppView>(() => {
-        const redirectedPath = sessionStorage.getItem("redirectPath");
-        return viewFromPath(redirectedPath ?? window.location.pathname);
+type MineCell = {
+    adjacent: number;
+    col: number;
+    isExploded: boolean;
+    isFlagged: boolean;
+    isMine: boolean;
+    isRevealed: boolean;
+    row: number;
+};
+
+type MineLevel = {
+    cols: number;
+    label: string;
+    mines: number;
+    rows: number;
+};
+
+type MineStatus = "ready" | "playing" | "won" | "lost";
+
+const mineLevel: MineLevel = {
+    label: "Intermediate",
+    rows: 16,
+    cols: 16,
+    mines: 40,
+};
+
+const neighborOffsets = [-1, 0, 1] as const;
+
+function createEmptyMineBoard(rows: number, cols: number): MineCell[][] {
+    return Array.from({ length: rows }, (_, row) =>
+        Array.from({ length: cols }, (_, col) => ({
+            adjacent: 0,
+            col,
+            isExploded: false,
+            isFlagged: false,
+            isMine: false,
+            isRevealed: false,
+            row,
+        })),
+    );
+}
+
+function cloneMineBoard(board: MineCell[][]) {
+    return board.map((row) => row.map((cell) => ({ ...cell })));
+}
+
+function isInsideBoard(board: MineCell[][], row: number, col: number) {
+    return row >= 0 && row < board.length && col >= 0 && col < board[0].length;
+}
+
+function createRandomMineBoard(
+    level: MineLevel,
+    safeRow: number,
+    safeCol: number,
+) {
+    const board = createEmptyMineBoard(level.rows, level.cols);
+    const safeCells = new Set<string>();
+
+    for (const rowOffset of neighborOffsets) {
+        for (const colOffset of neighborOffsets) {
+            const row = safeRow + rowOffset;
+            const col = safeCol + colOffset;
+
+            if (isInsideBoard(board, row, col)) {
+                safeCells.add(`${row}:${col}`);
+            }
+        }
+    }
+
+    const mineCandidates = board
+        .flat()
+        .filter((cell) => !safeCells.has(`${cell.row}:${cell.col}`));
+
+    for (let index = mineCandidates.length - 1; index > 0; index -= 1) {
+        const swapIndex = Math.floor(Math.random() * (index + 1));
+        [mineCandidates[index], mineCandidates[swapIndex]] = [
+            mineCandidates[swapIndex],
+            mineCandidates[index],
+        ];
+    }
+
+    mineCandidates.slice(0, level.mines).forEach((cell) => {
+        board[cell.row][cell.col].isMine = true;
     });
-    const [isWindowOpen, setIsWindowOpen] = useState(true);
+
+    board.forEach((row) => {
+        row.forEach((cell) => {
+            if (cell.isMine) {
+                return;
+            }
+
+            let adjacent = 0;
+
+            for (const rowOffset of neighborOffsets) {
+                for (const colOffset of neighborOffsets) {
+                    if (rowOffset === 0 && colOffset === 0) {
+                        continue;
+                    }
+
+                    const neighborRow = cell.row + rowOffset;
+                    const neighborCol = cell.col + colOffset;
+
+                    if (
+                        isInsideBoard(board, neighborRow, neighborCol) &&
+                        board[neighborRow][neighborCol].isMine
+                    ) {
+                        adjacent += 1;
+                    }
+                }
+            }
+
+            cell.adjacent = adjacent;
+        });
+    });
+
+    return board;
+}
+
+function revealMineCells(board: MineCell[][], row?: number, col?: number) {
+    const nextBoard = cloneMineBoard(board);
+
+    nextBoard.forEach((boardRow) => {
+        boardRow.forEach((cell) => {
+            if (cell.isMine) {
+                cell.isRevealed = true;
+            }
+        });
+    });
+
+    if (row !== undefined && col !== undefined) {
+        nextBoard[row][col].isExploded = true;
+    }
+
+    return nextBoard;
+}
+
+function revealOpenArea(
+    board: MineCell[][],
+    startRow: number,
+    startCol: number,
+) {
+    const nextBoard = cloneMineBoard(board);
+    const stack: MineCell[] = [nextBoard[startRow][startCol]];
+
+    while (stack.length > 0) {
+        const cell = stack.pop();
+
+        if (!cell || cell.isRevealed || cell.isFlagged || cell.isMine) {
+            continue;
+        }
+
+        cell.isRevealed = true;
+
+        if (cell.adjacent !== 0) {
+            continue;
+        }
+
+        for (const rowOffset of neighborOffsets) {
+            for (const colOffset of neighborOffsets) {
+                if (rowOffset === 0 && colOffset === 0) {
+                    continue;
+                }
+
+                const row = cell.row + rowOffset;
+                const col = cell.col + colOffset;
+
+                if (isInsideBoard(nextBoard, row, col)) {
+                    stack.push(nextBoard[row][col]);
+                }
+            }
+        }
+    }
+
+    return nextBoard;
+}
+
+function hasClearedMineBoard(board: MineCell[][]) {
+    return board.flat().every((cell) => cell.isMine || cell.isRevealed);
+}
+
+function formatMineCounter(value: number) {
+    if (value < 0) {
+        return `-${String(Math.abs(value)).padStart(2, "0").slice(0, 2)}`;
+    }
+
+    return String(Math.min(value, 999)).padStart(3, "0");
+}
+
+function formatMineTime(value: number) {
+    return String(Math.min(value, 999)).padStart(3, "0");
+}
+
+function copyTextFallback(value: string) {
+    const textarea = document.createElement("textarea");
+    textarea.value = value;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.append(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    textarea.remove();
+}
+
+async function copyToClipboard(value: string) {
+    if (navigator.clipboard?.writeText) {
+        try {
+            await navigator.clipboard.writeText(value);
+            return;
+        } catch {
+            copyTextFallback(value);
+            return;
+        }
+    }
+
+    copyTextFallback(value);
+}
+
+function contactCopyValue(href: string) {
+    return href.replace(/^mailto:/, "");
+}
+
+type WindowBounds = {
+    height: number;
+    width: number;
+    x: number;
+    y: number;
+};
+
+type DesktopWindow = {
+    bounds: WindowBounds;
+    view: AppView;
+    zIndex: number;
+};
+
+type ResizeEdge = "n" | "e" | "s" | "w" | "ne" | "nw" | "se" | "sw";
+
+type WindowInteraction =
+    | {
+          origin: WindowBounds;
+          pointerX: number;
+          pointerY: number;
+          type: "drag";
+          view: AppView;
+      }
+    | {
+          edge: ResizeEdge;
+          origin: WindowBounds;
+          pointerX: number;
+          pointerY: number;
+          type: "resize";
+          view: AppView;
+      };
+
+const defaultWindowBounds: Record<
+    AppView,
+    Pick<WindowBounds, "width" | "height">
+> = {
+    home: { width: 820, height: 610 },
+    experience: { width: 920, height: 640 },
+    search: { width: 620, height: 440 },
+    contacts: { width: 690, height: 470 },
+    notepad: { width: 900, height: 610 },
+    paint: { width: 940, height: 650 },
+    // music: { width: 520, height: 570 },
+    minesweeper: { width: 360, height: 430 },
+};
+
+const minWindowBounds = {
+    height: 260,
+    width: 330,
+};
+
+const resizeEdges: ResizeEdge[] = ["n", "e", "s", "w", "ne", "nw", "se", "sw"];
+
+function createDesktopWindow(
+    view: AppView,
+    index: number,
+    zIndex: number,
+): DesktopWindow {
+    const defaults = defaultWindowBounds[view];
+
+    return {
+        bounds: {
+            height: defaults.height,
+            width: defaults.width,
+            x: 18 + index * 34,
+            y: 18 + index * 28,
+        },
+        view,
+        zIndex,
+    };
+}
+
+function clampWindowBounds(
+    bounds: WindowBounds,
+    workspace: HTMLDivElement | null,
+): WindowBounds {
+    if (!workspace) {
+        return bounds;
+    }
+
+    const maxWidth = Math.max(minWindowBounds.width, workspace.clientWidth);
+    const maxHeight = Math.max(minWindowBounds.height, workspace.clientHeight);
+    const width = Math.min(
+        Math.max(bounds.width, minWindowBounds.width),
+        maxWidth,
+    );
+    const height = Math.min(
+        Math.max(bounds.height, minWindowBounds.height),
+        maxHeight,
+    );
+
+    return {
+        height,
+        width,
+        x: Math.min(Math.max(bounds.x, 0), Math.max(0, maxWidth - width)),
+        y: Math.min(Math.max(bounds.y, 0), Math.max(0, maxHeight - height)),
+    };
+}
+
+function resizeWindowBounds(
+    origin: WindowBounds,
+    edge: ResizeEdge,
+    deltaX: number,
+    deltaY: number,
+) {
+    let { height, width, x, y } = origin;
+
+    if (edge.includes("e")) {
+        width += deltaX;
+    }
+
+    if (edge.includes("s")) {
+        height += deltaY;
+    }
+
+    if (edge.includes("w")) {
+        width -= deltaX;
+        x += deltaX;
+    }
+
+    if (edge.includes("n")) {
+        height -= deltaY;
+        y += deltaY;
+    }
+
+    if (width < minWindowBounds.width) {
+        if (edge.includes("w")) {
+            x -= minWindowBounds.width - width;
+        }
+
+        width = minWindowBounds.width;
+    }
+
+    if (height < minWindowBounds.height) {
+        if (edge.includes("n")) {
+            y -= minWindowBounds.height - height;
+        }
+
+        height = minWindowBounds.height;
+    }
+
+    return { height, width, x, y };
+}
+
+function hasBrowserChrome(view: AppView) {
+    return view === "home" || view === "experience" || view === "search";
+}
+function App() {
+    const initialView = viewFromPath(
+        sessionStorage.getItem("redirectPath") ?? window.location.pathname,
+    );
+    const [openWindows, setOpenWindows] = useState<DesktopWindow[]>(() => [
+        createDesktopWindow(initialView, 0, 2),
+    ]);
+    const [activeWindow, setActiveWindow] = useState<AppView>(initialView);
+    const [interaction, setInteraction] = useState<WindowInteraction | null>(
+        null,
+    );
     const [selectedExperience, setSelectedExperience] =
         useState<Experience | null>(null);
+    const workspaceRef = useRef<HTMLDivElement>(null);
+    const zIndexRef = useRef(3);
+
+    function nextZIndex() {
+        zIndexRef.current += 1;
+        return zIndexRef.current;
+    }
+
+    function updateWindowBounds(view: AppView, bounds: WindowBounds) {
+        setOpenWindows((currentWindows) =>
+            currentWindows.map((item) =>
+                item.view === view
+                    ? {
+                          ...item,
+                          bounds: clampWindowBounds(
+                              bounds,
+                              workspaceRef.current,
+                          ),
+                      }
+                    : item,
+            ),
+        );
+    }
+
+    function focusWindow(view: AppView) {
+        const zIndex = nextZIndex();
+        setActiveWindow(view);
+        setOpenWindows((currentWindows) =>
+            currentWindows.map((item) =>
+                item.view === view ? { ...item, zIndex } : item,
+            ),
+        );
+    }
+
+    function openView(view: AppView, shouldPushHistory = true) {
+        const zIndex = nextZIndex();
+
+        setActiveWindow(view);
+        setOpenWindows([createDesktopWindow(view, 0, zIndex)]);
+
+        if (shouldPushHistory) {
+            window.history.pushState(null, "", pathByView[view]);
+        }
+    }
+
+    function closeWindow(view: AppView) {
+        setInteraction((currentInteraction) =>
+            currentInteraction?.view === view ? null : currentInteraction,
+        );
+        setOpenWindows([]);
+    }
+
+    function beginDrag(
+        event: PointerEvent<HTMLElement>,
+        desktopWindow: DesktopWindow,
+    ) {
+        if (event.button !== 0) {
+            return;
+        }
+
+        event.stopPropagation();
+        event.currentTarget.setPointerCapture(event.pointerId);
+        focusWindow(desktopWindow.view);
+        setInteraction({
+            origin: desktopWindow.bounds,
+            pointerX: event.clientX,
+            pointerY: event.clientY,
+            type: "drag",
+            view: desktopWindow.view,
+        });
+    }
+
+    function beginResize(
+        event: PointerEvent<HTMLSpanElement>,
+        desktopWindow: DesktopWindow,
+        edge: ResizeEdge,
+    ) {
+        if (event.button !== 0) {
+            return;
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
+        event.currentTarget.setPointerCapture(event.pointerId);
+        focusWindow(desktopWindow.view);
+        setInteraction({
+            edge,
+            origin: desktopWindow.bounds,
+            pointerX: event.clientX,
+            pointerY: event.clientY,
+            type: "resize",
+            view: desktopWindow.view,
+        });
+    }
 
     useEffect(() => {
         const redirectedPath = sessionStorage.getItem("redirectPath");
@@ -108,20 +591,56 @@ function App() {
         if (redirectedPath) {
             sessionStorage.removeItem("redirectPath");
             window.history.replaceState(null, "", redirectedPath);
-            setActiveView(viewFromPath(redirectedPath));
+            openView(viewFromPath(redirectedPath), false);
         }
 
         const handlePopState = () =>
-            setActiveView(viewFromPath(window.location.pathname));
+            openView(viewFromPath(window.location.pathname), false);
         window.addEventListener("popstate", handlePopState);
         return () => window.removeEventListener("popstate", handlePopState);
     }, []);
 
-    function openView(view: AppView) {
-        setActiveView(view);
-        setIsWindowOpen(true);
-        window.history.pushState(null, "", pathByView[view]);
-    }
+    useEffect(() => {
+        if (!interaction) {
+            return;
+        }
+
+        const currentInteraction = interaction;
+
+        function handlePointerMove(event: globalThis.PointerEvent) {
+            const deltaX = event.clientX - currentInteraction.pointerX;
+            const deltaY = event.clientY - currentInteraction.pointerY;
+            const nextBounds =
+                currentInteraction.type === "drag"
+                    ? {
+                          ...currentInteraction.origin,
+                          x: currentInteraction.origin.x + deltaX,
+                          y: currentInteraction.origin.y + deltaY,
+                      }
+                    : resizeWindowBounds(
+                          currentInteraction.origin,
+                          currentInteraction.edge,
+                          deltaX,
+                          deltaY,
+                      );
+
+            updateWindowBounds(currentInteraction.view, nextBounds);
+        }
+
+        function handlePointerUp() {
+            setInteraction(null);
+        }
+
+        window.addEventListener("pointermove", handlePointerMove);
+        window.addEventListener("pointerup", handlePointerUp);
+        window.addEventListener("pointercancel", handlePointerUp);
+
+        return () => {
+            window.removeEventListener("pointermove", handlePointerMove);
+            window.removeEventListener("pointerup", handlePointerUp);
+            window.removeEventListener("pointercancel", handlePointerUp);
+        };
+    }, [interaction]);
 
     return (
         <main className="desktop">
@@ -140,117 +659,27 @@ function App() {
                 </a>
             </section>
 
-            <div className="workspace" aria-label="Retro desktop workspace">
-                {isWindowOpen ? (
-                    <section className="window" aria-labelledby="window-title">
-                        <header className="title-bar">
-                            <h2 id="window-title">
-                                {windowTitles[activeView]}
-                            </h2>
-                            <div className="window-controls">
-                                <span aria-hidden="true" />
-                                <span aria-hidden="true" />
-                                <button
-                                    className="window-control-button"
-                                    type="button"
-                                    aria-label="Close window"
-                                    onClick={() => setIsWindowOpen(false)}
-                                >
-                                    X
-                                </button>
-                            </div>
-                        </header>
-                        {activeView === "home" ||
-                        activeView === "experience" ||
-                        activeView === "search" ? (
-                            <>
-                                <div className="menu-bar">
-                                    {[
-                                        ...browserTabs,
-                                        ...(activeView === "search"
-                                            ? [
-                                                  {
-                                                      id: "search" as const,
-                                                      label: "Google",
-                                                  },
-                                              ]
-                                            : []),
-                                    ].map((tab) => (
-                                        <button
-                                            className={
-                                                activeView === tab.id
-                                                    ? "tab is-active"
-                                                    : "tab"
-                                            }
-                                            key={tab.id}
-                                            onClick={() => openView(tab.id)}
-                                            type="button"
-                                        >
-                                            {tab.label}
-                                        </button>
-                                    ))}
-                                    <button
-                                        className="tab new-tab"
-                                        type="button"
-                                        aria-label="Open new tab"
-                                        onClick={() => openView("search")}
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            height="20px"
-                                            viewBox="0 -960 960 960"
-                                            width="20px"
-                                            fill="#000000"
-                                        >
-                                            <path d="M444-444H240v-72h204v-204h72v204h204v72H516v204h-72v-204Z" />
-                                        </svg>
-                                    </button>
-                                </div>
-                                <div
-                                    className="address-bar"
-                                    aria-label="Internet Explorer address bar"
-                                >
-                                    <span>Address</span>
-                                    <span className="address-input">
-                                        {addressText(activeView)}
-                                    </span>
-                                    <button
-                                        className="button small"
-                                        type="button"
-                                        disabled={activeView !== "search"}
-                                        onClick={() =>
-                                            googleSearch(
-                                                activeView === "search"
-                                                    ? ""
-                                                    : "laasyaaki.com",
-                                            )
-                                        }
-                                    >
-                                        Search
-                                    </button>
-                                </div>
-                            </>
-                        ) : null}
-                        <div className="window-body">
-                            {activeView === "home" && <HomePanel />}
-                            {activeView === "experience" && (
-                                <ExperiencePanel
-                                    onShowMore={setSelectedExperience}
-                                />
-                            )}
-                            {activeView === "search" && <SearchPanel />}
-                            {/* {activeView === "mail" && <MailPanel />} */}
-                            {activeView === "contacts" && <ContactsPanel />}
-                            {activeView === "notepad" && <BlogPanel />}
-                            {activeView === "paint" && <PaintPanel />}
-                            {activeView === "minesweeper" && (
-                                <DummyApp title="Minesweeper" />
-                            )}
-                        </div>
-                    </section>
-                ) : (
+            <div
+                className="workspace"
+                aria-label="Retro desktop workspace"
+                ref={workspaceRef}
+            >
+                {openWindows.length === 0 && (
                     <DesktopShortcuts onOpen={openView} />
                 )}
+                {openWindows.map((desktopWindow) => (
+                    <AppWindowFrame
+                        activeWindow={activeWindow}
+                        desktopWindow={desktopWindow}
+                        interaction={interaction}
+                        key={desktopWindow.view}
+                        onBeginDrag={beginDrag}
+                        onClose={closeWindow}
+                        onFocus={focusWindow}
+                        onOpenView={openView}
+                        onShowMore={setSelectedExperience}
+                    />
+                ))}
             </div>
 
             {selectedExperience && (
@@ -269,25 +698,38 @@ function App() {
                     Start
                 </button>
                 <nav className="app-bar" aria-label="Windows apps">
-                    {desktopApps.map((app) => (
-                        <button
-                            className={
-                                isWindowOpen && activeView === app.id
-                                    ? "app-button is-active"
-                                    : "app-button"
-                            }
-                            key={app.id}
-                            type="button"
-                            onClick={() => openView(app.id)}
-                        >
-                            {app.icon === "ie" ? (
-                                <InternetExplorerIcon />
-                            ) : (
-                                <AppIcon type={app.icon} />
-                            )}
-                            <span>{taskbarLabels[app.id]}</span>
-                        </button>
-                    ))}
+                    {desktopApps.map((app) => {
+                        const isAppOpen = openWindows.some((item) =>
+                            app.id === "home"
+                                ? hasBrowserChrome(item.view)
+                                : item.view === app.id,
+                        );
+                        const isAppActive =
+                            isAppOpen &&
+                            (app.id === "home"
+                                ? hasBrowserChrome(activeWindow)
+                                : activeWindow === app.id);
+
+                        return (
+                            <button
+                                className={
+                                    isAppActive
+                                        ? "app-button is-active"
+                                        : "app-button"
+                                }
+                                key={app.id}
+                                type="button"
+                                onClick={() => openView(app.id)}
+                            >
+                                {app.icon === "ie" ? (
+                                    <InternetExplorerIcon />
+                                ) : (
+                                    <AppIcon type={app.icon} />
+                                )}
+                                <span>{taskbarLabels[app.id]}</span>
+                            </button>
+                        );
+                    })}
                 </nav>
                 <time dateTime="2026">33:72 PM</time>
             </footer>
@@ -295,9 +737,150 @@ function App() {
     );
 }
 
+function AppWindowFrame({
+    activeWindow,
+    desktopWindow,
+    interaction,
+    onBeginDrag,
+    onClose,
+    onFocus,
+    onOpenView,
+    onShowMore,
+}: {
+    activeWindow: AppView;
+    desktopWindow: DesktopWindow;
+    interaction: WindowInteraction | null;
+    onBeginDrag: (
+        event: PointerEvent<HTMLElement>,
+        desktopWindow: DesktopWindow,
+    ) => void;
+    onClose: (view: AppView) => void;
+    onFocus: (view: AppView) => void;
+    onOpenView: (view: AppView) => void;
+    onShowMore: (experience: Experience) => void;
+}) {
+    const view = desktopWindow.view;
+    const isActive = activeWindow === view;
+    const isDragging =
+        interaction?.type === "drag" && interaction.view === view;
+
+    return (
+        <section
+            className={
+                isActive
+                    ? `window app-window app-window-${view} is-active`
+                    : `window app-window app-window-${view}`
+            }
+            aria-labelledby={`window-title-${view}`}
+            style={{
+                zIndex: desktopWindow.zIndex,
+            }}
+            onPointerDown={() => onFocus(view)}
+        >
+            <header
+                className={isDragging ? "title-bar is-dragging" : "title-bar"}
+                onPointerDown={(event) => onBeginDrag(event, desktopWindow)}
+            >
+                <h2 id={`window-title-${view}`}>{windowTitles[view]}</h2>
+                <div className="window-controls">
+                    <span aria-hidden="true" />
+                    <span aria-hidden="true" />
+                    <button
+                        className="window-control-button"
+                        type="button"
+                        aria-label="Close window"
+                        onPointerDown={(event) => event.stopPropagation()}
+                        onClick={() => onClose(view)}
+                    >
+                        X
+                    </button>
+                </div>
+            </header>
+
+            {hasBrowserChrome(view) ? (
+                <>
+                    <div className="menu-bar">
+                        {[
+                            ...browserTabs,
+                            ...(view === "search"
+                                ? [
+                                      {
+                                          id: "search" as const,
+                                          label: "Google",
+                                      },
+                                  ]
+                                : []),
+                        ].map((tab) => (
+                            <button
+                                className={
+                                    view === tab.id ? "tab is-active" : "tab"
+                                }
+                                key={tab.id}
+                                onClick={() => onOpenView(tab.id)}
+                                type="button"
+                            >
+                                {tab.label}
+                            </button>
+                        ))}
+                        <button
+                            className="tab new-tab"
+                            type="button"
+                            aria-label="Open new tab"
+                            onClick={() => onOpenView("search")}
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                height="20px"
+                                viewBox="0 -960 960 960"
+                                width="20px"
+                                fill="#000000"
+                            >
+                                <path d="M444-444H240v-72h204v-204h72v204h204v72H516v204h-72v-204Z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div
+                        className="address-bar"
+                        aria-label="Internet Explorer address bar"
+                    >
+                        <span>Address</span>
+                        <span className="address-input">
+                            {addressText(view)}
+                        </span>
+                        <button
+                            className="button small"
+                            type="button"
+                            disabled={view !== "search"}
+                            onClick={() =>
+                                googleSearch(
+                                    view === "search" ? "" : "laasyaaki.com",
+                                )
+                            }
+                        >
+                            Search
+                        </button>
+                    </div>
+                </>
+            ) : null}
+
+            <div className="window-body">
+                {view === "home" && <HomePanel />}
+                {view === "experience" && (
+                    <ExperiencePanel onShowMore={onShowMore} />
+                )}
+                {view === "search" && <SearchPanel />}
+                {view === "contacts" && <ContactsPanel />}
+                {view === "notepad" && <BlogPanel />}
+                {view === "paint" && <PaintPanel />}
+                {/* {view === "music" && <MusicPanel />} */}
+                {view === "minesweeper" && <MinesweeperPanel />}
+            </div>
+        </section>
+    );
+}
 function HomePanel() {
     return (
-        <div className="two-column">
+        <div>
             <section>
                 <h3>About Me</h3>
                 <p>{about}</p>
@@ -311,15 +894,6 @@ function HomePanel() {
                         Carnegie Mellon
                     </a>
                 </div> */}
-            </section>
-            <section className="status-panel" aria-label="Interests">
-                <h3>Currently Into</h3>
-                <ul className="check-list">
-                    <li>Machine learning</li>
-                    <li>Cybersecurity playbooks</li>
-                    <li>Jewelry and crafts</li>
-                    <li>Bike rides</li>
-                </ul>
             </section>
         </div>
     );
@@ -397,6 +971,53 @@ function SearchPanel() {
         </form>
     );
 }
+
+// function MusicPanel() {
+//     return (
+//         <div className="music-app">
+//             <div className="music-menu" aria-hidden="true">
+//                 <span>Disc</span>
+//                 <span>View</span>
+//                 <span>Options</span>
+//                 <span>Help</span>
+//             </div>
+//             <div className="music-display" aria-label="CD player display">
+//                 <span className="music-display-label">Track</span>
+//                 <strong>01</strong>
+//                 <span className="music-display-time">00:00</span>
+//             </div>
+//             <div className="music-controls" aria-label="CD player controls">
+//                 <button type="button" aria-label="Previous track">
+//                     |?
+//                 </button>
+//                 <button type="button" aria-label="Play">
+//                     ?
+//                 </button>
+//                 <button type="button" aria-label="Pause">
+//                     ??
+//                 </button>
+//                 <button type="button" aria-label="Stop">
+//                     ?
+//                 </button>
+//                 <button type="button" aria-label="Next track">
+//                     ?|
+//                 </button>
+//                 <button type="button" aria-label="Eject">
+//                     ?
+//                 </button>
+//             </div>
+
+//             <iframe
+//                 className="spotify-embed"
+//                 src={spotifyPlaylistEmbedUrl}
+//                 title="Spotify playlist"
+//                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+//                 loading="lazy"
+//                 frameBorder="0"
+//             />
+//         </div>
+//     );
+// }
 
 function PhotoStrip({ title, offset = 0 }: { title: string; offset?: number }) {
     return (
@@ -601,6 +1222,38 @@ function MailPanel() {
 }
 
 function ContactsPanel() {
+    const [copiedLink, setCopiedLink] = useState<string | null>(null);
+    const copyTimeoutRef = useRef<number | null>(null);
+
+    useEffect(() => {
+        return () => {
+            if (copyTimeoutRef.current) {
+                window.clearTimeout(copyTimeoutRef.current);
+            }
+        };
+    }, []);
+
+    async function handleCopy(link: { label: string; href: string }) {
+        const value = contactCopyValue(link.href);
+
+        try {
+            await copyToClipboard(value);
+        } catch {
+            return;
+        }
+
+        setCopiedLink(link.label);
+
+        if (copyTimeoutRef.current) {
+            window.clearTimeout(copyTimeoutRef.current);
+        }
+
+        copyTimeoutRef.current = window.setTimeout(() => {
+            setCopiedLink(null);
+            copyTimeoutRef.current = null;
+        }, 1800);
+    }
+
     return (
         <div className="contacts-app">
             <aside className="contacts-sidebar">
@@ -609,37 +1262,224 @@ function ContactsPanel() {
             </aside>
             <div className="contact-list">
                 {links.map((link) => (
-                    <a
-                        className="contact-card"
-                        href={link.href}
-                        key={link.label}
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        <span className="social-icon" aria-hidden="true">
-                            <BrandIcon label={link.label} />
-                        </span>
-                        <span>
-                            <strong>{link.label}</strong>
-                            <small>{link.href.replace("mailto:", "")}</small>
-                        </span>
-                    </a>
+                    <article className="contact-card" key={link.label}>
+                        <a
+                            className="contact-link"
+                            href={link.href}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <span className="social-icon" aria-hidden="true">
+                                <BrandIcon label={link.label} />
+                            </span>
+                            <span>
+                                <strong>{link.label}</strong>
+                                <small>{contactCopyValue(link.href)}</small>
+                            </span>
+                        </a>
+                        <button
+                            className={
+                                copiedLink === link.label
+                                    ? "copy-button is-copied"
+                                    : "copy-button"
+                            }
+                            type="button"
+                            aria-label={`Copy ${link.label}`}
+                            title={`Copy ${link.label}`}
+                            onClick={() => void handleCopy(link)}
+                        >
+                            {copiedLink === link.label ? (
+                                <CheckIcon />
+                            ) : (
+                                <CopyIcon />
+                            )}
+                        </button>
+                    </article>
                 ))}
             </div>
         </div>
     );
 }
 
-function DummyApp({ title }: { title: string }) {
+function MinesweeperPanel() {
+    const [board, setBoard] = useState(() =>
+        createEmptyMineBoard(mineLevel.rows, mineLevel.cols),
+    );
+    const [status, setStatus] = useState<MineStatus>("ready");
+    const [seconds, setSeconds] = useState(0);
+
+    useEffect(() => {
+        if (status !== "playing") {
+            return;
+        }
+
+        const intervalId = window.setInterval(() => {
+            setSeconds((currentSeconds) => Math.min(currentSeconds + 1, 999));
+        }, 1000);
+
+        return () => window.clearInterval(intervalId);
+    }, [status]);
+
+    const flagCount = board.flat().filter((cell) => cell.isFlagged).length;
+    const remainingMines = mineLevel.mines - flagCount;
+
+    function resetGame() {
+        setBoard(createEmptyMineBoard(mineLevel.rows, mineLevel.cols));
+        setStatus("ready");
+        setSeconds(0);
+    }
+
+    function handleCellReveal(row: number, col: number) {
+        if (status === "lost" || status === "won") {
+            return;
+        }
+
+        setBoard((currentBoard) => {
+            const selectedCell = currentBoard[row]?.[col];
+
+            if (
+                !selectedCell ||
+                selectedCell.isFlagged ||
+                selectedCell.isRevealed
+            ) {
+                return currentBoard;
+            }
+
+            const activeBoard =
+                status === "ready"
+                    ? createRandomMineBoard(mineLevel, row, col)
+                    : cloneMineBoard(currentBoard);
+
+            if (status === "ready") {
+                setStatus("playing");
+            }
+
+            const cell = activeBoard[row][col];
+
+            if (cell.isMine) {
+                setStatus("lost");
+                return revealMineCells(activeBoard, row, col);
+            }
+
+            const revealedBoard = revealOpenArea(activeBoard, row, col);
+
+            if (hasClearedMineBoard(revealedBoard)) {
+                setStatus("won");
+                return revealMineCells(revealedBoard);
+            }
+
+            return revealedBoard;
+        });
+    }
+
+    function handleCellFlag(
+        event: MouseEvent<HTMLButtonElement>,
+        row: number,
+        col: number,
+    ) {
+        event.preventDefault();
+
+        if (status === "lost" || status === "won") {
+            return;
+        }
+
+        setBoard((currentBoard) => {
+            const selectedCell = currentBoard[row]?.[col];
+
+            if (!selectedCell || selectedCell.isRevealed) {
+                return currentBoard;
+            }
+
+            const nextBoard = cloneMineBoard(currentBoard);
+            nextBoard[row][col].isFlagged = !nextBoard[row][col].isFlagged;
+            return nextBoard;
+        });
+    }
+
     return (
-        <div className="dummy-app">
-            <AppIcon type={title === "Paint" ? "paint" : "minesweeper"} />
-            <h3>{title}</h3>
-            <p>Coming soon maybe?</p>
+        <div className="minesweeper-app">
+            <div className="mine-classic-menu" aria-label="Minesweeper menu">
+                <span>Game</span>
+                <span>Help</span>
+            </div>
+
+            <div className="mine-shell">
+                <div className="mine-scorebar">
+                    <div className="mine-display" aria-label="Mines remaining">
+                        {formatMineCounter(remainingMines)}
+                    </div>
+                    <button
+                        className={`mine-face mine-face-${status}`}
+                        type="button"
+                        aria-label="New game"
+                        onClick={() => resetGame()}
+                    >
+                        {status === "lost"
+                            ? "Boom! Retry?"
+                            : status === "won"
+                              ? "Yay! Retry?"
+                              : "Reset"}
+                    </button>
+                    <div className="mine-display" aria-label="Seconds elapsed">
+                        {formatMineTime(seconds)}
+                    </div>
+                </div>
+
+                <div className="mine-board-wrap">
+                    <div
+                        className="mine-board"
+                        style={{
+                            gridTemplateColumns: `repeat(${mineLevel.cols}, 16px)`,
+                        }}
+                    >
+                        {board.flat().map((cell) => {
+                            const cellClasses = [
+                                "mine-cell",
+                                cell.isRevealed ? "is-revealed" : "",
+                                cell.isFlagged ? "is-flagged" : "",
+                                cell.isMine && cell.isRevealed ? "is-mine" : "",
+                                cell.isExploded ? "is-exploded" : "",
+                                cell.isRevealed && cell.adjacent > 0
+                                    ? `mine-count-${cell.adjacent}`
+                                    : "",
+                            ]
+                                .filter(Boolean)
+                                .join(" ");
+                            const cellText = cell.isRevealed
+                                ? cell.isMine
+                                    ? "*"
+                                    : cell.adjacent || ""
+                                : cell.isFlagged
+                                  ? "F"
+                                  : "";
+
+                            return (
+                                <button
+                                    aria-label={`Row ${cell.row + 1}, column ${cell.col + 1}`}
+                                    className={cellClasses}
+                                    key={`${cell.row}-${cell.col}`}
+                                    type="button"
+                                    onClick={() =>
+                                        handleCellReveal(cell.row, cell.col)
+                                    }
+                                    onContextMenu={(event) =>
+                                        handleCellFlag(
+                                            event,
+                                            cell.row,
+                                            cell.col,
+                                        )
+                                    }
+                                >
+                                    {cellText}
+                                </button>
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
-
 function PaintPanel() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [color, setColor] = useState("#000000");
@@ -832,6 +1672,23 @@ function LinksPanel() {
     );
 }
 
+function CopyIcon() {
+    return (
+        <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+            <rect x="8" y="8" width="11" height="11" />
+            <path d="M5 15H4V4h11v1" />
+        </svg>
+    );
+}
+
+function CheckIcon() {
+    return (
+        <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+            <path d="m5 12 4 4 10-10" />
+        </svg>
+    );
+}
+
 function BrandIcon({ label }: { label: string }) {
     switch (label) {
         case "GitHub":
@@ -888,7 +1745,7 @@ function InternetExplorerIcon() {
 function AppIcon({
     type,
 }: {
-    type: "mail" | "contacts" | "paint" | "notepad" | "minesweeper";
+    type: "mail" | "contacts" | "paint" | "notepad" | "music" | "minesweeper";
 }) {
     return (
         <svg
@@ -919,6 +1776,14 @@ function AppIcon({
                 <>
                     <rect x="8" y="5" width="17" height="23" />
                     <path d="M12 11h9M12 16h9M12 21h7" />
+                </>
+            )}
+            {type === "music" && (
+                <>
+                    <rect x="4" y="7" width="24" height="19" />
+                    <circle cx="16" cy="16.5" r="6" />
+                    <circle cx="16" cy="16.5" r="1.5" />
+                    <path d="M7 4h18v3H7zM7 23h4" />
                 </>
             )}
             {type === "minesweeper" && (
