@@ -381,8 +381,6 @@ const minWindowBounds = {
     width: 330,
 };
 
-const resizeEdges: ResizeEdge[] = ["n", "e", "s", "w", "ne", "nw", "se", "sw"];
-
 function createDesktopWindow(
     view: AppView,
     index: number,

@@ -21,18 +21,30 @@ export const about =
     "Hello! My name is Laasya and I am a computer science/machine learning student at Carnegie Mellon University, originally from Minnesota. I have a passion for math and computer science; I am especially interested in the topics where the two fields intersect like machine learning, cryptology, and coding theory. I was previously dual enrolled at the University of Minnesota when I first started exploring these topics. My favorite authors are Jane Austen, Oscar Wilde, and Marcus Zusak. I also like to make jewelry (and other arts and crafts) and go on bike rides when I can, when six months of Minnesota winter are not leaving behind mounds of snow, black ice, and an immeasurable amount of slush.";
 
 export const experiences: Experience[] = [
+    // {
+    //     title: "Student Ambassador",
+    //     meta: "Google, Fall 2026",
+    //     body: "Google AI Student Ambassador at my school! Updates coming soon!!",
+    // },
     {
         title: "AI Software Engineering Intern",
         meta: "CyberDNA Security, Summer 2026",
-        body: "Some cybersecurity, some AI... updates coming soon.",
+        body: "Some cybersecurity, some AI... updates coming soon!",
+    },
+    {
+        title: "RapidHandoff ER Operations Dashboard",
+        meta: "Personal Project, Summer 2026",
+        body: "Built multi-agent hospital operations platform that coordinates patient intake, triage, resource allocation, and staff scheduling through a multi-agent workflow architecture. Engineered MCP-integrated backend services (TypeScript, MongoDB, Google Cloud) supporting real-time bed assignment, staffing decisions, and operational analytics. Created receptionist and operations dashboards (React, Vite) with live workflow visibility, resource utilization monitoring, and agent decision tracing via Arize Phoenix.",
+        href: "https://devpost.com/software/rapid-handoff-er-flow",
     },
     {
         title: "Bias Lens",
         meta: "Steelhacks 2025 3x Winner",
         body: "Using LLMs to identify biased language in medical papers. We look at the sample of people included in the study and identify any genedered language being used to help users determine whether the results of a study is generalizable. All you do is paste the study or article link and we analyze it for you, helping you catch anything you may have missed and provide a second opinion on the applicability of the study's results.",
+        href: "https://devpost.com/software/the-bias-lens",
     },
     {
-        title: "Software Automation Engineering Intern",
+        title: "Software Engineering Intern",
         meta: "Dispatch, Summer 2025",
         body: "Interned on the QA team at Dispatch, a last-mile delivery logistics startup. I worked on automating mobile and web tests and explored how AI can improve migration work, including training an agent to convert legacy suites from Appium to Maestro and from Selenium to Playwright/Pytest.",
     },
@@ -53,7 +65,7 @@ export const experiences: Experience[] = [
         body: "Worked on the innovation team, experimenting with sensors and exploring how they could improve manufacturing processes inside General Mills plants. I also used Grafana to analyze live sensor data.",
     },
     {
-        title: "App Development Intern",
+        title: "Software Engineering Intern",
         meta: "Minnesota Twins, Summer 2023",
         body: "Built a CRUD app with React, TypeScript, Prisma, and Tailwind CSS to help executives match sales reps to ticket group types. I also completed tickets across other internal apps and worked with GraphQL endpoints.",
     },
