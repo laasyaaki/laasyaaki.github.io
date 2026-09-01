@@ -21,11 +21,11 @@ export const about =
     "Hello! My name is Laasya and I am a computer science/machine learning student at Carnegie Mellon University, originally from Minnesota. I have a passion for math and computer science; I am especially interested in the topics where the two fields intersect like machine learning, cryptology, and coding theory. I was previously dual enrolled at the University of Minnesota when I first started exploring these topics. My favorite authors are Jane Austen, Oscar Wilde, and Marcus Zusak. I also like to make jewelry (and other arts and crafts) and go on bike rides when I can, when six months of Minnesota winter are not leaving behind mounds of snow, black ice, and an immeasurable amount of slush.";
 
 export const experiences: Experience[] = [
-    // {
-    //     title: "Student Ambassador",
-    //     meta: "Google, Fall 2026",
-    //     body: "Google AI Student Ambassador at my school! Updates coming soon!!",
-    // },
+    {
+        title: "Student Ambassador",
+        meta: "Google, Fall 2026",
+        body: "Google AI Student Ambassador at my school! Updates coming soon!!",
+    },
     {
         title: "AI Software Engineering Intern",
         meta: "CyberDNA Security, Summer 2026",
