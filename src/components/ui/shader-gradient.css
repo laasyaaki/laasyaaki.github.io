@@ -1,0 +1,16 @@
+.shader-gradient {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: inherit;
+    pointer-events: none;
+    mask-image: linear-gradient(#000, #000);
+}
+
+.shader-gradient-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
