@@ -56,6 +56,14 @@ a {
     text-shadow: 2px 2px #000080;
 }
 
+.hero-actions {
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-width: 100%;
+}
+
 .eyebrow {
     background: #ffff99;
     border: 2px solid #111;
@@ -398,10 +406,19 @@ a {
     scrollbar-gutter: stable;
 }
 
+.app-window-music {
+    width: 620px;
+    max-width: 100%;
+    min-height: 0;
+    margin: 0 auto;
+}
+
 .app-window-music .window-body {
-    height: 546px;
+    min-height: 0;
+    padding: 8px;
     overflow: hidden;
     display: flex;
+    background: #c0c0c0;
 }
 
 .google-panel {
@@ -1144,95 +1161,27 @@ p {
 
 .music-app {
     background: #c0c0c0;
-    border-color: #fff #404040 #404040 #fff;
-    border-style: solid;
-    border-width: 2px;
     display: flex;
     flex: 1;
     flex-direction: column;
     gap: 10px;
+    min-width: 0;
     min-height: 0;
     overflow: hidden;
-    padding: 8px;
-}
-
-.music-menu {
-    display: flex;
-    gap: 18px;
-    min-height: 24px;
-    padding: 1px 4px;
-}
-
-.music-menu span::first-letter {
-    text-decoration: underline;
-}
-
-.music-display {
-    align-items: center;
-    background: #101d18;
-    border-color: #404040 #fff #fff #404040;
-    border-style: solid;
-    border-width: 3px;
-    color: #57ff83;
-    display: grid;
-    font-family: "Courier New", monospace;
-    grid-template-columns: auto auto 1fr;
-    min-height: 58px;
-    padding: 8px 12px;
-    text-shadow: 0 0 5px rgba(87, 255, 131, 0.7);
-}
-
-.music-display-label {
-    font-size: 0.72rem;
-    margin-right: 8px;
-    text-transform: uppercase;
-}
-
-.music-display strong {
-    font-size: 1.45rem;
-}
-
-.music-display-time {
-    font-size: 1.45rem;
-    font-weight: 700;
-    text-align: right;
-}
-
-.music-controls {
-    display: grid;
-    gap: 6px;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-}
-
-.music-controls button {
-    align-items: center;
-    background: #c0c0c0;
-    border-color: #fff #404040 #404040 #fff;
-    border-style: solid;
-    border-width: 2px;
-    color: #111;
-    cursor: pointer;
-    display: inline-flex;
-    font:
-        700 0.82rem Arial,
-        sans-serif;
-    justify-content: center;
-    min-height: 34px;
-    padding: 4px;
-}
-
-.music-controls button:active {
-    border-color: #404040 #fff #fff #404040;
 }
 
 .spotify-embed {
     display: block;
-    flex: 1 1 auto;
+    flex: 0 0 352px;
     width: 100%;
-    min-height: 0;
-    border: 2px solid;
-    border-color: #808080 #fff #fff #808080;
-    border-radius: 0;
+    height: 352px;
+    border: 0;
+    border-radius: 12px;
+}
+
+.music-footer {
+    text-align: right;
+    font-size: 0.75rem;
 }
 
 .link-grid {

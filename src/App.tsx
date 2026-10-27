@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import type { FormEvent, MouseEvent, PointerEvent } from "react";
 import { about, experiences, links, type Experience } from "./content";
 import { blogPosts, type BlogPost } from "./posts";
+import { MagicEightBallPanel } from "./components/MagicEightBall";
 
 type AppView =
     | "home"
@@ -11,8 +12,9 @@ type AppView =
     | "contacts"
     | "notepad"
     | "paint"
-    // | "music"
-    | "minesweeper";
+    | "music"
+    | "minesweeper"
+    | "magic8ball";
 
 const browserTabs: { id: AppView; label: string }[] = [
     { id: "home", label: "Home" },
@@ -24,7 +26,7 @@ const contactFormAccessKey =
     import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ?? "YOUR_WEB3FORMS_ACCESS_KEY";
 
 const spotifyPlaylistEmbedUrl =
-    "https://open.spotify.com/embed/playlist/6PUc70ez1gmDnnfKVFwEQc?utm_source=generator&si=58943ff5484f49a5";
+    "https://open.spotify.com/embed/playlist/6PUc70ez1gmDnnfKVFwEQc?utm_source=generator&si=4eddeaf8cdef4fa9";
 
 const pathByView: Record<AppView, string> = {
     home: "/",
@@ -34,8 +36,9 @@ const pathByView: Record<AppView, string> = {
     contacts: "/links",
     notepad: "/blog",
     paint: "/paint",
-    // music: "/music",
+    music: "/music",
     minesweeper: "/minesweeper",
+    magic8ball: "/magic-8-ball",
 };
 
 const desktopApps: {
@@ -48,15 +51,17 @@ const desktopApps: {
         | "paint"
         | "notepad"
         | "music"
-        | "minesweeper";
+        | "minesweeper"
+        | "magic8ball";
 }[] = [
     { id: "home", label: "Internet Explorer", icon: "ie" },
     // { id: "mail", label: "Mail", icon: "mail" },
     { id: "notepad", label: "Notepad", icon: "notepad" },
     { id: "contacts", label: "Contacts", icon: "contacts" },
     { id: "paint", label: "Paint", icon: "paint" },
-    // { id: "music", label: "CD Player", icon: "music" },
+    { id: "music", label: "Music Player", icon: "music" },
     { id: "minesweeper", label: "Minesweeper", icon: "minesweeper" },
+    { id: "magic8ball", label: "Magic 8 Ball", icon: "magic8ball" },
 ];
 
 const taskbarLabels: Record<AppView, string> = {
@@ -67,8 +72,9 @@ const taskbarLabels: Record<AppView, string> = {
     contacts: "Contacts",
     notepad: "Notepad",
     paint: "Paint",
-    // music: "CD Player",
+    music: "Music Player",
     minesweeper: "Minesweeper",
+    magic8ball: "Magic 8 Ball",
 };
 
 const windowTitles: Record<AppView, string> = {
@@ -79,8 +85,9 @@ const windowTitles: Record<AppView, string> = {
     contacts: "My Links",
     notepad: "Blog",
     paint: "Paint",
-    // music: "CD Player",
+    music: "Music Player",
     minesweeper: "Minesweeper",
+    magic8ball: "Magic 8 Ball",
 };
 
 function viewFromPath(pathname: string): AppView {
@@ -372,8 +379,9 @@ const defaultWindowBounds: Record<
     contacts: { width: 690, height: 470 },
     notepad: { width: 900, height: 610 },
     paint: { width: 940, height: 650 },
-    // music: { width: 520, height: 570 },
+    music: { width: 620, height: 520 },
     minesweeper: { width: 360, height: 430 },
+    magic8ball: { width: 600, height: 680 },
 };
 
 const minWindowBounds = {
@@ -647,14 +655,27 @@ function App() {
                     <p className="eyebrow">Laasya Aki.exe</p>
                     <h1>CS + ML at Carnegie Mellon</h1>
                 </div>
-                <a
-                    className="button primary"
-                    href={resumeHref}
-                    target="_blank"
-                    rel="noreferrer"
-                >
-                    View Resume
-                </a>
+                <div className="hero-actions">
+                    <a
+                        className="button primary"
+                        href={resumeHref}
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        View Resume
+                    </a>
+                    <a
+                        className="button primary"
+                        href={pathByView.experience}
+                        onClick={(event) => {
+                            if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                            event.preventDefault();
+                            openView("experience");
+                        }}
+                    >
+                        View Experience
+                    </a>
+                </div>
             </section>
 
             <div
@@ -717,6 +738,7 @@ function App() {
                                 }
                                 key={app.id}
                                 type="button"
+                                aria-label={taskbarLabels[app.id]}
                                 onClick={() => openView(app.id)}
                             >
                                 {app.icon === "ie" ? (
@@ -870,8 +892,9 @@ function AppWindowFrame({
                 {view === "contacts" && <ContactsPanel />}
                 {view === "notepad" && <BlogPanel />}
                 {view === "paint" && <PaintPanel />}
-                {/* {view === "music" && <MusicPanel />} */}
+                {view === "music" && <MusicPanel />}
                 {view === "minesweeper" && <MinesweeperPanel />}
+                {view === "magic8ball" && <MagicEightBallPanel />}
             </div>
         </section>
     );
@@ -970,52 +993,33 @@ function SearchPanel() {
     );
 }
 
-// function MusicPanel() {
-//     return (
-//         <div className="music-app">
-//             <div className="music-menu" aria-hidden="true">
-//                 <span>Disc</span>
-//                 <span>View</span>
-//                 <span>Options</span>
-//                 <span>Help</span>
-//             </div>
-//             <div className="music-display" aria-label="CD player display">
-//                 <span className="music-display-label">Track</span>
-//                 <strong>01</strong>
-//                 <span className="music-display-time">00:00</span>
-//             </div>
-//             <div className="music-controls" aria-label="CD player controls">
-//                 <button type="button" aria-label="Previous track">
-//                     |?
-//                 </button>
-//                 <button type="button" aria-label="Play">
-//                     ?
-//                 </button>
-//                 <button type="button" aria-label="Pause">
-//                     ??
-//                 </button>
-//                 <button type="button" aria-label="Stop">
-//                     ?
-//                 </button>
-//                 <button type="button" aria-label="Next track">
-//                     ?|
-//                 </button>
-//                 <button type="button" aria-label="Eject">
-//                     ?
-//                 </button>
-//             </div>
-
-//             <iframe
-//                 className="spotify-embed"
-//                 src={spotifyPlaylistEmbedUrl}
-//                 title="Spotify playlist"
-//                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-//                 loading="lazy"
-//                 frameBorder="0"
-//             />
-//         </div>
-//     );
-// }
+function MusicPanel() {
+    return (
+        <div className="music-app">
+            <iframe
+                className="spotify-embed"
+                data-testid="embed-iframe"
+                src={spotifyPlaylistEmbedUrl}
+                title="Spotify playlist music player"
+                width="100%"
+                height="352"
+                frameBorder="0"
+                allowFullScreen
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+            />
+            <div className="music-footer">
+                <a
+                    href="https://open.spotify.com/playlist/6PUc70ez1gmDnnfKVFwEQc"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    Open playlist in Spotify ↗
+                </a>
+            </div>
+        </div>
+    );
+}
 
 function PhotoStrip({ title, offset = 0 }: { title: string; offset?: number }) {
     return (
@@ -1743,7 +1747,7 @@ function InternetExplorerIcon() {
 function AppIcon({
     type,
 }: {
-    type: "mail" | "contacts" | "paint" | "notepad" | "music" | "minesweeper";
+    type: "mail" | "contacts" | "paint" | "notepad" | "music" | "minesweeper" | "magic8ball";
 }) {
     return (
         <svg
@@ -1789,6 +1793,14 @@ function AppIcon({
                     <rect x="5" y="5" width="22" height="22" />
                     <path d="M5 13h22M5 20h22M13 5v22M20 5v22" />
                     <circle cx="16" cy="16" r="3" />
+                </>
+            )}
+            {type === "magic8ball" && (
+                <>
+                    <circle cx="16" cy="16" r="13" fill="#17172a" />
+                    <circle cx="16" cy="14" r="7" fill="#fff" />
+                    <path d="M14 12c0-3 4-3 4 0s-4 2-4 5 4 3 4 0-4-2-4-5Z" fill="none" />
+                    <path d="M8 22c2 3 5 4 8 4" fill="none" stroke="#777798" />
                 </>
             )}
         </svg>
